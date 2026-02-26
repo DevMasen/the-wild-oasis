@@ -13,7 +13,9 @@ Currently, two official plugins are available:
 
 installation: `npm i styled-components`
 
-`App.jsx`:
+## 1. Add styled with "styled" function:
+
+`/src/App.jsx`:
 
 ```js
 import styled from 'styled-components';
@@ -35,6 +37,42 @@ export default function App() {
 		<StyledApp>
 			<Element>Foo Baz</Element>
 		</StyledApp>
+	);
+}
+```
+
+## 2. Add Global Styles with Styled Components:
+
+`/src/styles/GlobalStlyes.js`:
+
+```js
+import { createGlobalStyle } from 'styled-components';
+
+const GlobalStyles = createGlobalStyle`
+    // Global Styles CSS
+`;
+
+export default GlobalStyles;
+```
+
+---
+
+`/src/App.jsx`:
+
+```js
+import styled from 'styled-components';
+import GlobalStyles from './styles/GlobalStyles';
+
+const StyledApp = styled.div`
+	// App Component Styles
+`;
+
+export default function App() {
+	return (
+		<>
+			<GlobalStyles />
+			<StyledApp>// App Children</StyledApp>
+		</>
 	);
 }
 ```
