@@ -76,3 +76,13 @@ export default function App() {
 	);
 }
 ```
+
+## 3. Style a Component from outside of the Application:
+
+```js
+import { NavLink } from 'react-router-dom';
+
+const StyledNavLink = styled(NavLink)`
+	// CSS Styles
+`;
+```
