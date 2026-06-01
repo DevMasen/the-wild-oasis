@@ -1,9 +1,7 @@
 import { Outlet } from 'react-router-dom';
-///////////////////////////////////////////
 import Sidebar from './Sidebar';
 import Header from './Header';
 import styled from 'styled-components';
-///////////////////////////////
 
 const StyledAppLayout = styled.div`
 	height: 100dvh;
