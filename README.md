@@ -86,3 +86,15 @@ const StyledNavLink = styled(NavLink)`
 	// CSS Styles
 `;
 ```
+
+# Get Started with Supabase :
+
+## 1.Create a new project from <strong>[supabase](https://supabase.com)</strong> account.
+
+## 2.Create tables template with Table Editor from sidebar.
+
+## 3.Add a sample table row for each table with `Insert` tab.
+
+## 4.Create a Policy for each table from : Authentication -> Configuration -> Policies
+
+## 5.Open Docs for each table from : Integration -> Installed -> Data API -> Docs

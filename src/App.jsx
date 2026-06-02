@@ -1,7 +1,4 @@
-import GloablStyles from './styles/GlobalStyles';
-//////////////////////////////////////////////
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
-///////////////////////////////////////////////
 import Dashboard from './pages/Dashboard';
 import Bookings from './pages/Bookings';
 import Cabins from './pages/Cabins';
@@ -10,11 +7,12 @@ import Settings from './pages/Settings';
 import Users from './pages/Users';
 import PageNotFound from './pages/PageNotFound';
 import AppLayout from './ui/AppLayout';
-////////////////////////////////////////////////
+import GlobalStyles from './styles/GlobalStyles';
+
 function App() {
 	return (
 		<>
-			<GloablStyles />
+			<GlobalStyles />
 			<BrowserRouter>
 				<Routes>
 					<Route
