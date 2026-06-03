@@ -89,12 +89,45 @@ const StyledNavLink = styled(NavLink)`
 
 # Get Started with Supabase :
 
-## 1.Create a new project from <strong>[supabase](https://supabase.com)</strong> account.
+- ## 1. Create a new project from <strong>[supabase](https://supabase.com)</strong> account.
 
-## 2.Create tables template with Table Editor from sidebar.
+- ## 2.Create tables template with Table Editor from sidebar.
 
-## 3.Add a sample table row for each table with `Insert` tab.
+- ## 3.Add a sample table row for each table with `Insert` tab.
 
-## 4.Create a Policy for each table from : Authentication -> Configuration -> Policies
+- ## 4.Create a Policy for each table from : Authentication -> Configuration -> Policies
 
-## 5.Open Docs for each table from : Integration -> Installed -> Data API -> Docs
+- ## 5.Open Docs for each table from : Integration -> Installed -> Data API -> Docs
+
+---
+
+# in local project:
+
+- ## 1. Installation : `npm i @supabase/supabase-js`
+- ## 2. Create supabase client in `services/supabase.js`:
+
+```js
+import { createClient } from '@supabase/supabase-js';
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+const supabaseKey = import.meta.env.VITE_SUPABASE_KEY;
+const supabase = createClient(supabaseUrl, supabaseKey);
+export default supabase;
+```
+
+- ## 3. Use supabase client to request data (GET):
+
+```js
+import supabase from './supabase';
+
+export async function getRows() {
+	// *(star) means all rows
+	const { data, error } = await supabase
+		.from('<tableName>')
+		.select('<rowName>');
+	if (error) {
+		console.error(error);
+		throw new Error('Table could not get loaded!');
+	}
+	return data;
+}
+```
