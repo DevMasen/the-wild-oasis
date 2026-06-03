@@ -101,7 +101,7 @@ const StyledNavLink = styled(NavLink)`
 
 ---
 
-# in local project:
+# I local project:
 
 - ## 1. Installation : `npm i @supabase/supabase-js`
 - ## 2. Create supabase client in `services/supabase.js`:
@@ -129,5 +129,89 @@ export async function getRows() {
 		throw new Error('Table could not get loaded!');
 	}
 	return data;
+}
+```
+
+# Get started with React Query:
+
+installation : `npm i @tanstack/react-query` , `npm i -D @tanstack/eslint-plugin-query` , `npm i @tanstack/react-query-devtools`
+
+- ## 1. Setting up React Query:
+
+```js
+import {
+	useQuery,
+	useMutation,
+	useQueryClient,
+	QueryClient,
+	QueryClientProvider,
+} from '@tanstack/react-query';
+import { getTodos, postTodo } from '../my-api';
+
+// Create a client
+const queryClient = new QueryClient();
+
+function App() {
+	return (
+		// Provide the client to your App
+		<QueryClientProvider client={queryClient}>
+			<Todos />
+		</QueryClientProvider>
+	);
+}
+
+function Todos() {
+	// Access the client
+	const queryClient = useQueryClient();
+
+	// Queries
+	const query = useQuery({ queryKey: ['todos'], queryFn: getTodos });
+
+	// Mutations
+	const mutation = useMutation({
+		mutationFn: postTodo,
+		onSuccess: () => {
+			// Invalidate and refetch
+			queryClient.invalidateQueries({ queryKey: ['todos'] });
+		},
+	});
+
+	return (
+		<div>
+			<ul>
+				{query.data?.map(todo => (
+					<li key={todo.id}>{todo.title}</li>
+				))}
+			</ul>
+
+			<button
+				onClick={() => {
+					mutation.mutate({
+						id: Date.now(),
+						title: 'Do Laundry',
+					});
+				}}
+			>
+				Add Todo
+			</button>
+		</div>
+	);
+}
+
+render(<App />, document.getElementById('root'));
+```
+
+## 2. Setting up React Query Devtools:
+
+```js
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+
+function App() {
+	return (
+		<QueryClientProvider client={queryClient}>
+			{/* The rest of your application */}
+			<ReactQueryDevtools initialIsOpen={false} />
+		</QueryClientProvider>
+	);
 }
 ```
