@@ -43,7 +43,7 @@ export default function App() {
 
 ## 2. Add Global Styles with Styled Components:
 
-`/src/styles/GlobalStlyes.js`:
+`/src/styles/GlobalStyles.js`:
 
 ```js
 import { createGlobalStyle } from 'styled-components';
