@@ -215,3 +215,182 @@ function App() {
 	);
 }
 ```
+
+# Get started with React Hook Form:
+
+installation: `npm install react-hook-form`
+
+## 1.Example:
+
+```js
+import { useForm } from 'react-hook-form';
+
+export default function App() {
+	const {
+		register,
+		handleSubmit,
+		watch,
+		formState: { errors },
+	} = useForm();
+
+	const onSubmit = data => console.log(data);
+
+	console.log(watch('example')); // watch input value by passing the name of it
+
+	return (
+		/* "handleSubmit" will validate your inputs before invoking "onSubmit" */
+		<form onSubmit={handleSubmit(onSubmit)}>
+			{/* register your input into the hook by invoking the "register" function */}
+			<input defaultValue="test" {...register('example')} />
+
+			{/* include validation with required or other standard HTML validation rules */}
+			<input {...register('exampleRequired', { required: true })} />
+			{/* errors will return when field validation fails  */}
+			{errors.exampleRequired && <span>This field is required</span>}
+
+			<input type="submit" />
+		</form>
+	);
+}
+```
+
+## 2.Register Fields:
+
+```js
+import { useForm } from 'react-hook-form';
+
+export default function App() {
+	const { register, handleSubmit } = useForm();
+	const onSubmit = data => console.log(data);
+
+	return (
+		<form onSubmit={handleSubmit(onSubmit)}>
+			<input {...register('firstName')} />
+			<select {...register('gender')}>
+				<option value="female">female</option>
+				<option value="male">male</option>
+				<option value="other">other</option>
+			</select>
+			<input type="submit" />
+		</form>
+	);
+}
+```
+
+## 3.Apply Validation:
+
+```js
+import { useForm } from 'react-hook-form';
+
+export default function App() {
+	const { register, handleSubmit } = useForm();
+	const onSubmit = data => console.log(data);
+
+	return (
+		<form onSubmit={handleSubmit(onSubmit)}>
+			<input
+				{...register('firstName', { required: true, maxLength: 20 })}
+			/>
+			<input {...register('lastName', { pattern: /^[A-Za-z]+$/i })} />
+			<input type="number" {...register('age', { min: 18, max: 99 })} />
+			<input type="submit" />
+		</form>
+	);
+}
+```
+
+## 4.Integrating with global state
+
+```js
+import { useForm } from 'react-hook-form';
+import { connect } from 'react-redux';
+import updateAction from './actions';
+
+export default function App(props) {
+	const { register, handleSubmit, setValue } = useForm({
+		defaultValues: {
+			firstName: '',
+			lastName: '',
+		},
+	});
+	// Submit your data into Redux store
+	const onSubmit = data => props.updateAction(data);
+
+	return (
+		<form onSubmit={handleSubmit(onSubmit)}>
+			<input {...register('firstName')} />
+			<input {...register('lastName')} />
+			<input type="submit" />
+		</form>
+	);
+}
+
+// Connect your component with redux
+connect(
+	({ firstName, lastName }) => ({ firstName, lastName }),
+	updateAction,
+)(YourForm);
+```
+
+## 5.Handle Errors:
+
+```js
+import { useForm } from 'react-hook-form';
+
+export default function App() {
+	const {
+		register,
+		formState: { errors },
+		handleSubmit,
+	} = useForm();
+	const onSubmit = data => console.log(data);
+
+	return (
+		<form onSubmit={handleSubmit(onSubmit)}>
+			<input
+				{...register('firstName', { required: true })}
+				aria-invalid={errors.firstName ? 'true' : 'false'}
+			/>
+			{errors.firstName?.type === 'required' && (
+				<p role="alert">First name is required</p>
+			)}
+
+			<input
+				{...register('mail', { required: 'Email Address is required' })}
+				aria-invalid={errors.mail ? 'true' : 'false'}
+			/>
+			{errors.mail && <p role="alert">{errors.mail.message}</p>}
+
+			<input type="submit" />
+		</form>
+	);
+}
+```
+
+## 6.Integrating with services:
+
+```js
+import { Form } from 'react-hook-form';
+
+function App() {
+	const { register, control } = useForm();
+
+	return (
+		<Form
+			action="/api/save" // Send post request with the FormData
+			// encType={'application/json'} you can also switch to json object
+			onSuccess={() => {
+				alert('Your application is updated.');
+			}}
+			onError={() => {
+				alert('Submission has failed.');
+			}}
+			control={control}
+		>
+			<input {...register('firstName', { required: true })} />
+			<input {...register('lastName', { required: true })} />
+			<button>Submit</button>
+		</Form>
+	);
+}
+```
