@@ -7,6 +7,7 @@ import {
 	HiOutlineHomeModern,
 	HiOutlineUsers,
 } from 'react-icons/hi2';
+//---
 const NavList = styled.ul`
 	display: flex;
 	flex-direction: column;

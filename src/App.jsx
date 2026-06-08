@@ -1,4 +1,5 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router';
+import { Toaster } from 'react-hot-toast';
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
@@ -14,7 +15,7 @@ import Users from './pages/Users';
 import PageNotFound from './pages/PageNotFound';
 
 import AppLayout from './ui/AppLayout';
-import { Toaster } from 'react-hot-toast';
+//---
 
 const queryClient = new QueryClient({
 	defaultOptions: {

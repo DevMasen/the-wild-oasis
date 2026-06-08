@@ -5,6 +5,7 @@ import CreateCabinForm from './CreateCabinForm';
 import { useDeleteCabin } from './useDeleteCabin';
 
 import { formatCurrency } from '../../utils/helpers';
+//---
 
 const TableRow = styled.div`
 	display: grid;
