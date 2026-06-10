@@ -12,6 +12,7 @@ import { useCreateCabin } from './useCreateCabin';
 
 import { formatCurrency } from '../../utils/helpers';
 import Table from '../../ui/Table';
+// import Menus from '../../ui/Menus';
 //---
 
 const Img = styled.img`
@@ -107,6 +108,8 @@ function CabinRow({ cabin }) {
 						/>
 					</Modal.Window>
 				</Modal>
+
+				{/* <Menus.Menu></Menus.Menu> */}
 			</div>
 		</Table.Row>
 	);
