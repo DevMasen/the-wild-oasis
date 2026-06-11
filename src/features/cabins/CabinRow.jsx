@@ -4,15 +4,15 @@ import { HiPencil, HiTrash } from 'react-icons/hi';
 import { HiSquare2Stack } from 'react-icons/hi2';
 
 import CreateCabinForm from './CreateCabinForm';
-import Modal from '../../ui/Modal';
+
+import { formatCurrency } from '../../utils/helpers';
 import ConfirmDelete from '../../ui/ConfirmDelete';
+import Table from '../../ui/Table';
+import Menus from '../../ui/Menus';
+import Modal from '../../ui/Modal';
 
 import { useDeleteCabin } from './useDeleteCabin';
 import { useCreateCabin } from './useCreateCabin';
-
-import { formatCurrency } from '../../utils/helpers';
-import Table from '../../ui/Table';
-// import Menus from '../../ui/Menus';
 //---
 
 const Img = styled.img`
@@ -44,7 +44,7 @@ const Discount = styled.div`
 
 function CabinRow({ cabin }) {
 	const {
-		id,
+		id: cabinId,
 		name,
 		maxCapacity,
 		regularPrice,
@@ -81,35 +81,41 @@ function CabinRow({ cabin }) {
 				<span>&mdash;</span>
 			)}
 			<div>
-				<button onClick={handleDuplicate} disabled={isCreating}>
-					<HiSquare2Stack />
-				</button>
-
 				<Modal>
-					<Modal.Open opens="edit">
-						<button>
-							<HiPencil />
-						</button>
-					</Modal.Open>
-					<Modal.Window name="edit">
-						<CreateCabinForm editedCabin={cabin} />
-					</Modal.Window>
+					<Menus.Menu>
+						<Menus.Toggle id={cabinId} />
+						<Menus.List id={cabinId}>
+							<Menus.Button
+								icon={<HiSquare2Stack />}
+								onClick={handleDuplicate}
+							>
+								Duplicate
+							</Menus.Button>
+							<Modal.Open opens="edit">
+								<Menus.Button icon={<HiPencil />}>
+									Edit
+								</Menus.Button>
+							</Modal.Open>
+							<Modal.Open opens="confirm-delete">
+								<Menus.Button icon={<HiTrash />}>
+									Delete
+								</Menus.Button>
+							</Modal.Open>
+						</Menus.List>
 
-					<Modal.Open opens="confirm-delete">
-						<button>
-							<HiTrash />
-						</button>
-					</Modal.Open>
-					<Modal.Window name="confirm-delete">
-						<ConfirmDelete
-							resourceName={'cabins'}
-							onConfirm={() => deleteCabin(id)}
-							disabled={isDeleting}
-						/>
-					</Modal.Window>
+						<Modal.Window name="edit">
+							<CreateCabinForm editedCabin={cabin} />
+						</Modal.Window>
+
+						<Modal.Window name="confirm-delete">
+							<ConfirmDelete
+								resourceName={'cabins'}
+								onConfirm={() => deleteCabin(cabinId)}
+								disabled={isDeleting || isCreating}
+							/>
+						</Modal.Window>
+					</Menus.Menu>
 				</Modal>
-
-				{/* <Menus.Menu></Menus.Menu> */}
 			</div>
 		</Table.Row>
 	);
