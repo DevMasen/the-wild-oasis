@@ -59,7 +59,7 @@ const PaginationButton = styled.button`
 	}
 `;
 
-const PAGE_SIZE = 10;
+const PAGE_SIZE = import.meta.env.VITE_PAGE_SIZE;
 
 function Pagination({ count }) {
 	const [searchParams, setSearchParams] = useSearchParams();
