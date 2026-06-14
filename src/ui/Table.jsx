@@ -1,5 +1,6 @@
-import { createContext, useContext } from 'react';
 import styled from 'styled-components';
+
+import { createContext, useContext } from 'react';
 //---
 
 const StyledTable = styled.div`

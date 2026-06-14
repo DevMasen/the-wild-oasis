@@ -1,10 +1,9 @@
+import GlobalStyles from './styles/GlobalStyles';
+
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router';
 import { Toaster } from 'react-hot-toast';
-
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-
-import GlobalStyles from './styles/GlobalStyles';
 
 import Dashboard from './pages/Dashboard';
 import Bookings from './pages/Bookings';
@@ -13,10 +12,10 @@ import Login from './pages/Login';
 import Settings from './pages/Settings';
 import Users from './pages/Users';
 import PageNotFound from './pages/PageNotFound';
-
-import AppLayout from './ui/AppLayout';
 import Booking from './pages/Booking';
 import Checkin from './pages/Checkin';
+
+import AppLayout from './ui/AppLayout';
 //---
 
 const queryClient = new QueryClient({

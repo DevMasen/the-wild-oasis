@@ -1,5 +1,5 @@
-import { useSearchParams } from 'react-router';
 import styled, { css } from 'styled-components';
+import { useSearchParams } from 'react-router';
 //---
 
 const StyledFilter = styled.div`

@@ -3,16 +3,17 @@ import styled from 'styled-components';
 import { HiPencil, HiTrash } from 'react-icons/hi';
 import { HiSquare2Stack } from 'react-icons/hi2';
 
+import { useDeleteCabin } from './useDeleteCabin';
+import { useCreateCabin } from './useCreateCabin';
+
 import CreateCabinForm from './CreateCabinForm';
 
-import { formatCurrency } from '../../utils/helpers';
 import ConfirmDelete from '../../ui/ConfirmDelete';
 import Table from '../../ui/Table';
 import Menus from '../../ui/Menus';
 import Modal from '../../ui/Modal';
 
-import { useDeleteCabin } from './useDeleteCabin';
-import { useCreateCabin } from './useCreateCabin';
+import { formatCurrency } from '../../utils/helpers';
 //---
 
 const Img = styled.img`

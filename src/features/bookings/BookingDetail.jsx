@@ -1,9 +1,12 @@
 import styled from 'styled-components';
 
+import { useNavigate } from 'react-router';
+
 import { useBooking } from './useBooking';
 import { useMoveBack } from '../../hooks/useMoveBack';
 
 import BookingDataBox from './BookingDataBox';
+
 import Row from '../../ui/Row';
 import Heading from '../../ui/Heading';
 import Tag from '../../ui/Tag';
@@ -11,7 +14,6 @@ import ButtonGroup from '../../ui/ButtonGroup';
 import Button from '../../ui/Button';
 import ButtonText from '../../ui/ButtonText';
 import Spinner from '../../ui/Spinner';
-import { useNavigate } from 'react-router';
 //---
 
 const HeadingGroup = styled.div`

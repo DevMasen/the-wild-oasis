@@ -1,5 +1,6 @@
-import { useQuery } from '@tanstack/react-query';
 import { useParams } from 'react-router';
+import { useQuery } from '@tanstack/react-query';
+
 import { getBooking } from '../../services/apiBookings';
 //---
 

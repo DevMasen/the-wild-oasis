@@ -1,6 +1,7 @@
-import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { getBookings } from '../../services/apiBookings';
 import { useSearchParams } from 'react-router';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
+
+import { getBookings } from '../../services/apiBookings';
 //---
 
 export function useBookings() {
