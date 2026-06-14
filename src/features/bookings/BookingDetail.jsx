@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router';
 
 import { useBooking } from './useBooking';
 import { useMoveBack } from '../../hooks/useMoveBack';
+import { useCheckout } from '../check-in-out/useCheckout';
 
 import BookingDataBox from './BookingDataBox';
 
@@ -24,11 +25,12 @@ const HeadingGroup = styled.div`
 
 function BookingDetail() {
 	const navigate = useNavigate();
+
 	const { booking = {}, isLoading } = useBooking();
+	const moveBack = useMoveBack();
+	const { checkout, isCheckingOut } = useCheckout();
 
 	const { status, id: bookingId } = booking;
-
-	const moveBack = useMoveBack();
 
 	const statusToTagName = {
 		unconfirmed: 'blue',
@@ -58,7 +60,19 @@ function BookingDetail() {
 						Check in
 					</Button>
 				)}
-				<Button variation="secondary" onClick={moveBack}>
+				{status === 'checked-in' && (
+					<Button
+						onClick={() => checkout(bookingId)}
+						disabled={isCheckingOut}
+					>
+						Check out
+					</Button>
+				)}
+				<Button
+					variation="secondary"
+					disabled={isCheckingOut}
+					onClick={moveBack}
+				>
 					Back
 				</Button>
 			</ButtonGroup>

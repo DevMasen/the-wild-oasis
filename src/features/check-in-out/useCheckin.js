@@ -10,7 +10,7 @@ export function useCheckin() {
 	const queryClient = useQueryClient();
 	const {
 		mutate: checkin,
-		isPending: isChecking,
+		isPending: isCheckingIn,
 		error,
 	} = useMutation({
 		mutationFn: ({ bookingId, breakfast }) =>
@@ -27,5 +27,5 @@ export function useCheckin() {
 		onError: () => toast.error('There was an error while checking in'),
 	});
 
-	return { checkin, isChecking, error };
+	return { checkin, isCheckingIn, error };
 }

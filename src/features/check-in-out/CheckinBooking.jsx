@@ -31,11 +31,11 @@ const Box = styled.div`
 function CheckinBooking() {
 	const [confirmPaid, setConfirmPaid] = useState(false);
 	const [addBreakfast, setAddBreakfast] = useState(false);
-	const moveBack = useMoveBack();
 
 	const { booking = {}, isLoading: isLoadingBooking } = useBooking();
-	const { checkin, isChecking } = useCheckin();
 	const { settings = {}, isLoading: isLoadingSettings } = useSettings();
+	const { checkin, isCheckingIn } = useCheckin();
+	const moveBack = useMoveBack();
 
 	const {
 		id: bookingId,
@@ -84,7 +84,7 @@ function CheckinBooking() {
 							setAddBreakfast(add => !add);
 							setConfirmPaid(false);
 						}}
-						disabled={isChecking}
+						disabled={isCheckingIn}
 						id="breakfast"
 					>
 						Want to add breakfast for{' '}
@@ -97,7 +97,7 @@ function CheckinBooking() {
 				<Checkbox
 					checked={confirmPaid}
 					onChange={() => setConfirmPaid(cur => !cur)}
-					disabled={confirmPaid || isChecking}
+					disabled={confirmPaid || isCheckingIn}
 					id="confirm"
 				>
 					I confirm that {guests?.fullName} has paid the total amount
@@ -110,7 +110,7 @@ function CheckinBooking() {
 
 			<ButtonGroup>
 				<Button
-					disabled={!confirmPaid || isChecking}
+					disabled={!confirmPaid || isCheckingIn}
 					onClick={handleCheckin}
 				>
 					Check in booking #{bookingId}
