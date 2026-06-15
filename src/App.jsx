@@ -16,6 +16,7 @@ import Booking from './pages/Booking';
 import Checkin from './pages/Checkin';
 
 import AppLayout from './ui/AppLayout';
+import ProtectedRoute from './ui/ProtectedRoute';
 //---
 
 const queryClient = new QueryClient({
@@ -37,7 +38,13 @@ function App() {
 						index
 						element={<Navigate to="dashboard" replace />}
 					/>
-					<Route element={<AppLayout />}>
+					<Route
+						element={
+							<ProtectedRoute>
+								<AppLayout />
+							</ProtectedRoute>
+						}
+					>
 						<Route path="dashboard" element={<Dashboard />} />
 						<Route path="bookings" element={<Bookings />} />
 						<Route

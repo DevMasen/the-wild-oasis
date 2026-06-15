@@ -78,7 +78,7 @@ function BookingDetail() {
 				<Modal>
 					<Modal.Open opens="delete">
 						<Button
-							variation="danger"
+							$variation="danger"
 							disabled={isDeleting || isCheckingOut}
 						>
 							Delete
@@ -97,7 +97,7 @@ function BookingDetail() {
 					</Modal.Window>
 				</Modal>
 				<Button
-					variation="secondary"
+					$variation="secondary"
 					disabled={isCheckingOut || isDeleting}
 					onClick={moveBack}
 				>

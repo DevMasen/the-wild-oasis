@@ -18,7 +18,15 @@ function LoginForm() {
 	function handleSubmit(e) {
 		e.preventDefault();
 		if (!email || !password) return;
-		login({ email, password });
+		login(
+			{ email, password },
+			{
+				onSettled: () => {
+					setEmail('');
+					setPassword('');
+				},
+			},
+		);
 	}
 
 	return (
@@ -31,6 +39,7 @@ function LoginForm() {
 					value={email}
 					onChange={e => setEmail(e.target.value)}
 					disabled={isLoggingIn}
+					required
 				/>
 			</FormRowVertical>
 			<FormRowVertical label="Password">
@@ -41,10 +50,11 @@ function LoginForm() {
 					value={password}
 					onChange={e => setPassword(e.target.value)}
 					disabled={isLoggingIn}
+					required
 				/>
 			</FormRowVertical>
 			<FormRowVertical>
-				<Button size="large">
+				<Button $size="large">
 					{isLoggingIn ? <SpinnerMini /> : 'Login'}
 				</Button>
 			</FormRowVertical>
