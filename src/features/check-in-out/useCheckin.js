@@ -8,11 +8,7 @@ import { updateBooking } from '../../services/apiBookings';
 export function useCheckin() {
 	const navigate = useNavigate();
 	const queryClient = useQueryClient();
-	const {
-		mutate: checkin,
-		isPending: isCheckingIn,
-		error,
-	} = useMutation({
+	const { mutate: checkin, isPending: isCheckingIn } = useMutation({
 		mutationFn: ({ bookingId, breakfast }) =>
 			updateBooking(bookingId, {
 				status: 'checked-in',
@@ -24,8 +20,8 @@ export function useCheckin() {
 			queryClient.invalidateQueries({ active: true });
 			navigate('/');
 		},
-		onError: () => toast.error('There was an error while checking in'),
+		onError: err => toast.error(err.message),
 	});
 
-	return { checkin, isCheckingIn, error };
+	return { checkin, isCheckingIn };
 }

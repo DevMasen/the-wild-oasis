@@ -7,21 +7,17 @@ import { login as loginApi } from '../../services/apiAuth';
 export function useLogin() {
 	const navigate = useNavigate();
 	const queryClient = useQueryClient();
-	const {
-		mutate: login,
-		isPending: isLoggingIn,
-		error,
-	} = useMutation({
+	const { mutate: login, isPending: isLoggingIn } = useMutation({
 		mutationFn: ({ email, password }) => loginApi({ email, password }),
 		onSuccess: data => {
 			queryClient.setQueryData(['user'], data.user);
 			toast.success('Successfully logged in');
 			navigate('/dashboard', { replace: true });
 		},
-		onError: () => {
-			toast.error('Provided Email or Password is Incorrect');
+		onError: err => {
+			toast.error(err.message);
 		},
 	});
 
-	return { login, isLoggingIn, error };
+	return { login, isLoggingIn };
 }

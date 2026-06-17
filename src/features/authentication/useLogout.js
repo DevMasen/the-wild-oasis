@@ -7,21 +7,17 @@ import { logout as logoutApi } from '../../services/apiAuth';
 export function useLogout() {
 	const navigate = useNavigate();
 	const queryClient = useQueryClient();
-	const {
-		mutate: logout,
-		isPending: isLoggingOut,
-		error,
-	} = useMutation({
+	const { mutate: logout, isPending: isLoggingOut } = useMutation({
 		mutationFn: logoutApi,
 		onSuccess: () => {
 			toast.success('Successfully Logged out');
 			queryClient.removeQueries();
 			navigate('/login', { replace: true });
 		},
-		onError: () => {
-			toast.error('There was an error while logging out');
+		onError: err => {
+			toast.error(err.message);
 		},
 	});
 
-	return { logout, isLoggingOut, error };
+	return { logout, isLoggingOut };
 }

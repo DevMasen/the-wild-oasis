@@ -3,15 +3,21 @@ import Button from '../../ui/Button';
 import Form from '../../ui/Form';
 import FormRow from '../../ui/FormRow';
 import Input from '../../ui/Input';
+import { useSignup } from './useSignup';
 //---
-// Email regex: /\S+@\S+\.\S+/
 
 function SignupForm() {
-	const { register, getValues, formState, handleSubmit } = useForm();
+	const { register, getValues, formState, handleSubmit, reset } = useForm();
 	const { errors } = formState;
+	const { signup, isSigningUp } = useSignup();
 
-	function onSuccess(data) {
-		console.log(data);
+	function onSuccess({ email, password, fullName }) {
+		signup(
+			{ email, password, fullName },
+			{
+				onSettled: () => reset(),
+			},
+		);
 	}
 
 	function onError(errors) {
@@ -27,6 +33,7 @@ function SignupForm() {
 					{...register('fullName', {
 						required: 'This field is required',
 					})}
+					disabled={isSigningUp}
 				/>
 			</FormRow>
 
@@ -41,6 +48,7 @@ function SignupForm() {
 							message: 'Please provide a valid email address',
 						},
 					})}
+					disabled={isSigningUp}
 				/>
 			</FormRow>
 
@@ -58,6 +66,7 @@ function SignupForm() {
 							message: 'Password needs a minimum of 8 characters',
 						},
 					})}
+					disabled={isSigningUp}
 				/>
 			</FormRow>
 
@@ -74,15 +83,20 @@ function SignupForm() {
 							value === getValues().password ||
 							'passwords need to match',
 					})}
+					disabled={isSigningUp}
 				/>
 			</FormRow>
 
 			<FormRow>
 				{/* type is an HTML attribute! */}
-				<Button $variation="secondary" type="reset">
+				<Button
+					$variation="secondary"
+					type="reset"
+					disabled={isSigningUp}
+				>
 					Cancel
 				</Button>
-				<Button>Create new user</Button>
+				<Button disabled={isSigningUp}>Create new user</Button>
 			</FormRow>
 		</Form>
 	);
