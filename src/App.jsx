@@ -14,6 +14,7 @@ import Users from './pages/Users';
 import PageNotFound from './pages/PageNotFound';
 import Booking from './pages/Booking';
 import Checkin from './pages/Checkin';
+import Account from './pages/Account';
 
 import AppLayout from './ui/AppLayout';
 import ProtectedRoute from './ui/ProtectedRoute';
@@ -58,6 +59,7 @@ function App() {
 						<Route path="cabins" element={<Cabins />} />
 						<Route path="settings" element={<Settings />} />
 						<Route path="users" element={<Users />} />
+						<Route path="account" element={<Account />} />
 					</Route>
 					<Route path="login" element={<Login />} />
 					<Route path="*" element={<PageNotFound />} />
