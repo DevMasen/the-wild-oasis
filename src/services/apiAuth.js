@@ -8,8 +8,8 @@ export async function login(credentials) {
 	});
 
 	if (error) {
-		console.error(error.message);
-		throw new Error('Auth : Login Failed');
+		console.error(error);
+		throw new Error(error.message);
 	}
 
 	return data;
@@ -22,8 +22,8 @@ export async function getCurrentUser() {
 
 	const { data, error } = await supabase.auth.getUser();
 	if (error) {
-		console.error(error.message);
-		throw new Error('Auth: Could not load user session');
+		console.error(error);
+		throw new Error(error.message);
 	}
 
 	return data?.user;
@@ -32,8 +32,8 @@ export async function getCurrentUser() {
 export async function logout() {
 	const { error } = await supabase.auth.signOut();
 	if (error) {
-		console.error(error.message);
-		throw new Error('Auth: Logout Failed');
+		console.error(error);
+		throw new Error(error.message);
 	}
 }
 
@@ -49,8 +49,8 @@ export async function signup({ email, password, fullName }) {
 		},
 	});
 	if (error) {
-		console.error(error.message);
-		throw new Error('Auth: Could not create new account');
+		console.error(error);
+		throw new Error(error.message);
 	}
 	return data;
 }

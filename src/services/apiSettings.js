@@ -8,8 +8,8 @@ export async function getSettings() {
 		.single();
 
 	if (error) {
-		console.error(error.message);
-		throw new Error('Settings could not be loaded');
+		console.error(error);
+		throw new Error(error.message);
 	}
 	return data;
 }
@@ -24,8 +24,8 @@ export async function updateSetting(newSetting) {
 		.single();
 
 	if (error) {
-		console.error(error.message);
-		throw new Error('Settings could not be updated');
+		console.error(error);
+		throw new Error(error.message);
 	}
 	return data;
 }
