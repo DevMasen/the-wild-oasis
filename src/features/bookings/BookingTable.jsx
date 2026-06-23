@@ -10,11 +10,10 @@ import Pagination from '../../ui/Pagination';
 //---
 
 function BookingTable() {
-	const { bookings = [], isLoading, count } = useBookings();
-
-	if (isLoading) return <Spinner />;
+	const { bookings, isLoading, count } = useBookings();
 
 	if (!bookings.length) return <Empty resourceName={'bookings'} />;
+	if (isLoading) return <Spinner />;
 
 	return (
 		<Menus>
