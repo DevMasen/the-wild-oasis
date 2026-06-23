@@ -18,6 +18,7 @@ import ButtonText from '../../ui/ButtonText';
 import Spinner from '../../ui/Spinner';
 import Modal from '../../ui/Modal';
 import ConfirmDelete from '../../ui/ConfirmDelete';
+import Empty from '../../ui/Empty';
 //---
 
 const HeadingGroup = styled.div`
@@ -29,12 +30,10 @@ const HeadingGroup = styled.div`
 function BookingDetail() {
 	const navigate = useNavigate();
 
-	const { booking = {}, isLoading } = useBooking();
+	const { booking, isLoading } = useBooking();
 	const moveBack = useMoveBack();
 	const { checkout, isCheckingOut } = useCheckout();
 	const { deleteBooking, isDeleting } = useDeleteBooking();
-
-	const { status, id: bookingId } = booking;
 
 	const statusToTagName = {
 		unconfirmed: 'blue',
@@ -43,6 +42,10 @@ function BookingDetail() {
 	};
 
 	if (isLoading) return <Spinner />;
+
+	if (!booking) return <Empty resourceName="booking" />;
+
+	const { status, id: bookingId } = booking;
 
 	return (
 		<>
