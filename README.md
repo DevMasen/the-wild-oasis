@@ -1,4 +1,4 @@
-<h1 align="center"> The Wild Oasis 🍕</h1>
+<h1 align="center"> The Wild Oasis 🏩</h1>
 <p align="center">
 <img align="center" width="720px" src="./banner.png" alt="Banner Image">
 </p>
