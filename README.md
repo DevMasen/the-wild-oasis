@@ -1,3 +1,18 @@
+<h1 align="center"> The Wild Oasis 🍕</h1>
+<p align="center">
+<img align="center" width="720px" src="./banner.png" alt="Banner Image">
+</p>
+
+# Dashboard Web App for control hotel activities.
+
+## A Project by `Jonas Schmedtmann` - React Ultimate Course
+
+## See demo on 👉[this URL](https://the-wild-oasis-masein.netlify.app)👈
+
+## Thanks for visiting my GitHub 🫡♥️
+
+---
+
 # Get Started with Styled Components :
 
 installation: `npm i styled-components`
